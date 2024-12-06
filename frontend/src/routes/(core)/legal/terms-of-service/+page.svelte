@@ -1,0 +1,19 @@
+<script lang="ts">
+	import Section from '../Section.svelte';
+	import Subsection from '../Subsection.svelte';
+</script>
+
+<div>
+	<div class="space-y-4 border-l border-transparent px-6">
+		<h1 class="text-4xl font-bold text-primary">Terms of Service and Use</h1>
+		<p class="text-sm text-tertiary">Last Updated</p>
+	</div>
+
+	<div class="py-12">
+		<Section title="Introduction">
+			<Subsection>
+				TODO
+			</Subsection>
+		</Section>
+	</div>
+</div>

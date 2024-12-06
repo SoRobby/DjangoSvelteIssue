@@ -1,0 +1,94 @@
+Hello world...
+
+
+<div>
+    <p>items</p>
+    <p>list: {{ items }}</p>
+</div>
+<div>
+    <p>space_vehicle_items</p>
+    <p>list: {{ space_vehicle_items }}</p>
+</div>
+
+
+<div>
+    <hr>
+    <h1>space_vehicle_items (list)</h1>
+    {% for item in space_vehicle_items %}
+        <div>
+            <h2>{{ item.name }}</h2>
+            <p>Supplier: {{ item.supplier.name }}</p>
+            <p>Properties:</p>
+            <ul>
+                {% for prop in item.properties.all %}
+                    <li>{{ prop.name }}: {{ prop.value }} {{ prop.units_suffix }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <hr>
+
+    <h1>space_vehicle_items (group list)</h1>
+    {% for item in space_vehicle_items %}
+        <div>
+            <h2>{{ item.name }}</h2>
+            <p>Supplier: {{ item.supplier.name }}</p>
+            <p>Properties:</p>
+            <ul>
+                {% for group in item.property_groups.all %}
+                    <li>{{ group.name }}</li>
+                    {{ group.group_items.all }}
+                    <ul>
+                        {% if group.group_items.all %}
+                            {% for property in group.group_items.all %}
+                            <li>{{ property.name }}: {{ property.value }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>No properties...</li>
+                        {% endif %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+
+    <h1>Properties (list)</h1>
+    {% for prop in properties %}
+        <div>
+            <h2>{{ prop.name }}</h2>
+            <p>Value: {{ prop.property_value.units_suffix }}</p>
+        </div>
+    {% endfor %}
+
+    <hr>
+
+
+    {##}
+    {##}
+    {##}
+    {#        {% for item in items %}#}
+    {#            <h2>{{ item.name }}</h2>#}
+    {#            <ul>#}
+    {#                {% for group in item.property_groups.all %}#}
+    {#                    <li>{{ group.name }}</li>#}
+    {#                    <ul>#}
+    {#                        {% for prop in group.group_items.all %}#}
+    {#                            <li>{{ prop.name }}: {{ prop.value }}</li>#}
+    {#                        {% endfor %}#}
+    {#                    </ul>#}
+    {#                {% endfor %}#}
+    {##}
+    {#                <li>Ungrouped</li>#}
+    {#                <ul>#}
+    {#                    {% for prop in item.properties.all %}#}
+    {#                        {% if prop.group is null %}#}
+    {#                            <li>{{ prop.name }}: {{ prop.value }}</li>#}
+    {#                        {% endif %}#}
+    {#                    {% endfor %}#}
+    {#                </ul>#}
+    {#            </ul>#}
+    {#        {% endfor %}#}
+
+</div>

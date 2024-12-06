@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="px-8 py-8">
+<h1 class="text-3xl font-bold underline">
+    Hello world!
+</h1>
+<div>
+
+    <div class="py-4">
+        <div class="border bg-gray-200 rounded-md border-gray-300 p-2">
+            <p class="text-gray-900 font-bold text-lg">Library Properties</p>
+            <ul class="pl-6">
+                {% for prop in properties %}
+                    <li>{{ prop.name }} (default = {{ prop.property_value.default_value }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="py-4 grid gap-4 border border-gray-300 px-4 rounded-md">
+        <h2 class="text-gray-900 font-bold text-lg">Products (Basic View)</h2>
+        {% for item in space_vehicle_items %}
+            <div>
+                <p class="text-lg font-medium">{{ item.name }}</p>
+                <p>Supplier: {{ item.supplier.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mt-8 py-4 grid gap-4 border border-gray-300 px-4 rounded-md">
+        <h2 class="text-gray-900 font-bold text-lg">Products (Properties List View)</h2>
+        {% for item in space_vehicle_items %}
+            <div>
+                <p class="text-lg font-medium">{{ item.name }}</p>
+                <p>Supplier: {{ item.supplier.name }}</p>
+                <div>
+                    <p class="text-gray-900">Properties</p>
+                    <ul class="pl-8 list-disc text-sm text-gray-600">
+                        {% for prop in item.properties.all %}
+                            <li>
+                                {{ prop.name }}: {{ prop.value }}
+                                {% if prop.units_suffix %}
+                                    {{ prop.units_suffix }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mt-8 py-4 grid gap-4 border border-gray-300 px-4 rounded-md">
+        <h2 class="text-gray-900 font-bold text-lg">Products (Properties Grouped List View)</h2>
+        {% for item in space_vehicle_items %}
+            <div>
+                <p class="text-lg font-medium">{{ item.name }}</p>
+                <p>Supplier: {{ item.supplier.name }}</p>
+                <div>
+                    <p class="text-gray-900">Properties</p>
+                    <ul class="pl-8 list-disc text-sm text-gray-600">
+                        {% for prop_group in item.property_groups.all %}
+                            <li>
+                                {{ prop_group.name }}
+                            </li>
+                            <ul class="pl-8 list-disc text-sm text-gray-600">
+                                {% for prop in prop_group.group_properties.all %}
+                                    <li>
+                                        {{ prop.name }}: {{ prop.value }}
+                                        {% if prop.units_suffix %}
+                                            {{ prop.units_suffix }}
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                        <li>
+                            Unorganized Properties
+                        </li>
+                        <ul class="pl-8 list-disc text-sm text-gray-600">
+                            {% for prop in item.get_properties_without_group %}
+                                <li>
+                                    {{ prop.name }}: {{ prop.value }}
+                                    {% if prop.units_suffix %}
+                                        {{ prop.units_suffix }}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+</body>
+</html>

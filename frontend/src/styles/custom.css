@@ -1,0 +1,17 @@
+/* Custom css styling for the overflow scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0.375rem !important;
+    cursor: pointer;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem !important;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: rgba(229, 231, 235, var(--bg-opacity));
+    cursor: pointer;
+    background: #f1f5f9;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #cbd5e1;
+}
