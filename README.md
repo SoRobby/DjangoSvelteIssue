@@ -51,9 +51,13 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 4. Development Database
-An SQLite database should already exist with the following credentials for development:
+### 4. Run the server
+```bash
+python manage.py runserver
+```
 
+
+### 5. Admin User for Testing
 - **Username:** `admin@admin.com`
 - **Password:** `admin`
 
